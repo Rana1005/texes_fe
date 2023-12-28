@@ -1,0 +1,142 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white border border-1">
+  <div class="container-fluid mx-4">
+    <a class="navbar-brand brand-container" href="javascript:void(0)">
+      <img src="assets/mxp.png" class="brand-logo" alt="Developer contact akash.singh.thakur98@gmail.com">
+    </a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 fs-6 mb-lg-0 me-4 nav-text">
+        <li class="nav-item mx-2">
+          <a class="nav-link active" aria-current="page" href="#">HOME</a>
+        </li>
+        <li class="nav-item mx-2">
+          <a class="nav-link active" aria-current="page" href="#">RENEWABLE POWER</a>
+        </li>
+        <li class="nav-item mx-3">
+          <a class="nav-link active" aria-current="page" href="#">CONTACT US</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="d-flex justify-content-center">
+  <div class="mt-5 border border-start-0 border-end-0 border-3 border-dashed intro-border w-50">
+    <div class="text mt-3 mx-2">
+      <p class="intro-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente ullam inventore recusandae at. Similique fugiat ipsum magnam natus nesciunt nihil iste, esse totam,
+        possimus cumque architecto, dignissimos sint odit quibusdam.
+      </p>
+    </div>
+  </div>
+</div>
+<div class="d-flex justify-content-center mt-4">
+  <form [formGroup]="companyForm">
+    <div class="mb-4">
+      <label for="code" class="form-label intro-text">ENTER YOUR ZIP CODE</label>
+      <input type="text" class="form-control form-control-lg text-center" id="code" name="code" formControlName="pincode" aria-describedby="codehelp">
+      <!-- <div id="codehelp" class="form-text">Fill your Zip Code .</div> -->
+    </div>
+    <div class="mb-4">
+      <label for="add" class="form-label intro-text">ENTER YOUR ADDRESS</label>
+      <input type="text" class="form-control form-control-lg" name="address" formControlName="address" id="add">
+    </div>
+    <div class="d-flex justify-content-center mt-3 intro-text">
+      <h4>Premise Type</h4>
+    </div>
+    <div class="d-flex justify-content-center mb-3 radio-text">
+      <div class="form-check m-3">
+        <input class="form-check-input" type="radio" name="premiseType" value="residential" formControlName="premiseType" id="flexRadioDefault1">
+        <label class="form-check-label" for="flexRadioDefault1">
+         Residential
+        </label>
+      </div>
+      <div class="form-check m-3">
+        <input class="form-check-input" type="radio" name="premiseType" value="commercial" formControlName="premiseType" id="flexRadioDefault2">
+        <label class="form-check-label" for="flexRadioDefault2">
+          Commercial
+        </label>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="d-flex justify-content-center mt-3">
+  <button type="button" class="btn btn-primary mx-4" (click)="getData()" [disabled]="companyForm.invalid">Search</button>
+  <button type="button" class="btn btn-danger mx-4">Clear</button>
+</div>
+
+<div class="container d-flex justify-content-center align-items-center mt-4">
+  <div class="table-responsive mt-4 w-50">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">
+            <span>Term -></span>
+            <hr class="m-1">
+            <span>Company</span>
+          </th>
+          <th scope="col" *ngFor="let header of dataList.terms">{{header}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cellData of dataList.rates;">
+          <td *ngFor="let rowData of cellData" (click)="selectRow(cellData[0],rowData)">{{rowData}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="proceed ms-4">
+    <button type="button" class="btn" [ngClass]="valueSelected ? 'btn-success' : 'btn-outline-secondary' " data-bs-toggle="modal" data-bs-target="#proceedModal" [disabled]="!valueSelected">Proceed</button>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="proceedModal" tabindex="-1" aria-labelledby="proceedModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="proceedModalLabel">Fill Required Information</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="proceedForm">
+          <div class="mb-4">
+            <label for="code" class="form-label">Email</label>
+            <input type="text" class="form-control" id="code" name="email" formControlName="email" aria-describedby="codehelp">
+          </div>
+          <div class="mb-4">
+            <label for="company" class="form-label">Company</label>
+            <input type="text" class="form-control" name="company" formControlName="company" id="company" readonly>
+          </div>
+          <div class="mb-4">
+            <label for="add" class="form-label">Value</label>
+            <input type="text" class="form-control" name="value" formControlName="value" id="add" readonly>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" [disabled]="proceedForm.invalid" data-bs-dismiss="modal" (click)="sendEmail()">Send Data</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="text-center footer">
+  <div class="d-flex justify-content-around align-items-center">
+    <div class="d-flex justify-content-space-between">
+      <img class="mx-3 my-2" src="assets/linkedin.svg" alt="linkedIn">
+      <img class="mx-3 my-2" src="assets/facebook.svg" alt="facebook">
+      <img class="mx-3 my-2" src="assets/twitter.svg" alt="twitter">
+      <img class="mx-3 my-2" src="assets/instagram.svg" alt="instagram">
+    </div>
+    <div class="copyright">
+      <span class="text-muted footer-fnt">all right reserved @website.com</span>
+    </div>
+    <div class="d-flex justify-content-space-between align-items-center">
+      <div class="text"></div>
+      <img class="mx-3 my-2" src="assets/linkedin.svg" alt="linkedIn">
+      <img class="mx-3 my-2" src="assets/facebook.svg" alt="facebook">
+    </div>
+  </div>
+</footer>
+

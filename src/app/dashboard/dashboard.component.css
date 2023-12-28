@@ -1,0 +1,48 @@
+.brand-container {
+  width: 30%
+}
+.brand-logo {
+  width: 60%;
+}
+
+.nav-text {
+  font-weight: bold;
+}
+
+.page-height {
+  min-height: 85vh;
+}
+
+.intro-border {
+  border-style: dashed !important;
+  border-left: 0px !important;
+  border-right: 0px !important;
+}
+
+.intro-text {
+  font-family:'DM Sans';
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 500;
+  color: #676a6c;
+}
+
+.radio-text {
+  font-family:'DM Sans';
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 400;
+  color: #676a6c;
+}
+
+.footer{
+  background-color: #dbe1e4;
+  padding: 10px;
+}
+
+.footer-fnt {
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 400;
+}
+
